@@ -9,6 +9,24 @@ app.use(express.json());
 
 const customers = [];
 
+// Middleware
+function verifyIfExistsAccountCPF(request, response, next) {
+  // Middleware - roda antes de entrar na rota
+    const { cpf } = request.headers;
+
+  const customer = customers.find((customer) => customer.cpf === cpf);
+
+  if (!customer) {
+    return response.status(400).json({ error: "Customer not found" });
+  }
+
+  // Serve para passar o registro para dentro da rota
+  request.customer = customer;
+
+  // Função para seguir na rota
+  return next();
+}
+
 app.post("/account", (request, response) => {
   const { cpf, name } = request.body;
 
@@ -30,14 +48,12 @@ app.post("/account", (request, response) => {
   return response.status(201).send();
 });
 
-app.get("/statement", (request, response) => {
-  const { cpf } = request.headers;
+// Quando eu quero que todas as rotas a seguir tenham esse Middleware
+// app.use(verifyIfExistsAccountCPF);
 
-  const customer = customers.find((customer) => customer.cpf === cpf);
-
-  if (!customer) {
-    return response.status(400).json({ error: "Customer not found" });
-  }
+// Middleware precisa ser declarado antes do request e response, porém pode ter mais que um
+app.get("/statement", verifyIfExistsAccountCPF, (request, response) => {
+  const { customer } = request;
 
   return response.json(customer.statement);
 });
