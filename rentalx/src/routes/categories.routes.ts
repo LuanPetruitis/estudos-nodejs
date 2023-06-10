@@ -1,26 +1,27 @@
 import { Router } from 'express';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import multer from 'multer';
 
-import { CategoriesRepository } from '../models/cars/repositories/CategoriresRepository';
-import { CreateCategoryService } from '../models/cars/services/CreateCategoryService';
+import { createCategoryController } from '../modules/cars/useCases/createCategory';
+import { importCategoryController } from '../modules/cars/useCases/importCategory';
+import { listCategoriesController } from '../modules/cars/useCases/listCategories';
 
 const categoriesRoutes = Router();
 
-const categoriesRepository = new CategoriesRepository();
+const upload = multer({
+  dest: './tmp',
+});
 
 categoriesRoutes.post('/', (request, response) => {
-  const { name, description } = request.body;
-
-  const createCategoryService = new CreateCategoryService(categoriesRepository);
-
-  createCategoryService.execute({ name, description });
-
-  return response.status(201).send();
+  return createCategoryController.handle(request, response);
 });
 
 categoriesRoutes.get('/', (request, response) => {
-  const allCategories = categoriesRepository.list();
+  return listCategoriesController.handle(request, response);
+});
 
-  return response.json(allCategories);
+categoriesRoutes.post('/import', upload.single('file'), (request, response) => {
+  importCategoryController.handle;
 });
 
 export { categoriesRoutes };
