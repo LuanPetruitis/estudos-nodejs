@@ -1,7 +1,11 @@
 // In resolver you will write GraphQL queries
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { CourseService } from './course.service';
-import { CreateCourseInput } from 'src/graphql';
+import {
+  CreateCourseInput,
+  DeleteCourseInput,
+  UpdateCourseInput,
+} from 'src/graphql';
 
 @Resolver('Course')
 export class CourseResolver {
@@ -15,5 +19,15 @@ export class CourseResolver {
   @Mutation('createCourse')
   async createCourse(@Args('data') input: CreateCourseInput) {
     return this.courseService.createCourse(input);
+  }
+
+  @Mutation('updateCourse')
+  async updateCourse(@Args('data') input: UpdateCourseInput) {
+    return this.courseService.updateCourse(input);
+  }
+
+  @Mutation('deleteCourse')
+  async deleteCourse(@Args('data') input: DeleteCourseInput) {
+    return this.courseService.deleteCourse(input);
   }
 }

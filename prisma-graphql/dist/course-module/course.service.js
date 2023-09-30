@@ -31,6 +31,39 @@ let CourseService = class CourseService {
             return err;
         }
     }
+    async updateCourse(input) {
+        try {
+            const updationData = { ...input };
+            await this.prisma.course.update({
+                where: {
+                    id: updationData.id,
+                },
+                data: {
+                    name: updationData.name,
+                    description: updationData.description,
+                    duration: updationData.duration,
+                },
+            });
+            return 'Course updated successfully!';
+        }
+        catch (err) {
+            return err;
+        }
+    }
+    async deleteCourse(input) {
+        try {
+            const deletenData = { ...input };
+            await this.prisma.course.delete({
+                where: {
+                    id: deletenData.id,
+                },
+            });
+            return 'Course deleted successfully!';
+        }
+        catch (err) {
+            return err;
+        }
+    }
 };
 exports.CourseService = CourseService;
 exports.CourseService = CourseService = __decorate([

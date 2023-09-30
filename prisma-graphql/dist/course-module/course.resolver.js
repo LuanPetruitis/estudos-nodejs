@@ -26,6 +26,12 @@ let CourseResolver = class CourseResolver {
     async createCourse(input) {
         return this.courseService.createCourse(input);
     }
+    async updateCourse(input) {
+        return this.courseService.updateCourse(input);
+    }
+    async deleteCourse(input) {
+        return this.courseService.deleteCourse(input);
+    }
 };
 exports.CourseResolver = CourseResolver;
 __decorate([
@@ -41,6 +47,20 @@ __decorate([
     __metadata("design:paramtypes", [graphql_2.CreateCourseInput]),
     __metadata("design:returntype", Promise)
 ], CourseResolver.prototype, "createCourse", null);
+__decorate([
+    (0, graphql_1.Mutation)('updateCourse'),
+    __param(0, (0, graphql_1.Args)('data')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [graphql_2.UpdateCourseInput]),
+    __metadata("design:returntype", Promise)
+], CourseResolver.prototype, "updateCourse", null);
+__decorate([
+    (0, graphql_1.Mutation)('deleteCourse'),
+    __param(0, (0, graphql_1.Args)('data')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [graphql_2.DeleteCourseInput]),
+    __metadata("design:returntype", Promise)
+], CourseResolver.prototype, "deleteCourse", null);
 exports.CourseResolver = CourseResolver = __decorate([
     (0, graphql_1.Resolver)('Course'),
     __metadata("design:paramtypes", [course_service_1.CourseService])

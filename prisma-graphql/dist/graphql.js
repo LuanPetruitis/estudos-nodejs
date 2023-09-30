@@ -1,9 +1,15 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.User = exports.Course = exports.IMutation = exports.IQuery = exports.DeleteUserInput = exports.UpdateUserInput = exports.CreateUserInput = exports.CreateCourseInput = void 0;
+exports.User = exports.Course = exports.IMutation = exports.IQuery = exports.DeleteUserInput = exports.UpdateUserInput = exports.CreateUserInput = exports.DeleteCourseInput = exports.UpdateCourseInput = exports.CreateCourseInput = void 0;
 class CreateCourseInput {
 }
 exports.CreateCourseInput = CreateCourseInput;
+class UpdateCourseInput {
+}
+exports.UpdateCourseInput = UpdateCourseInput;
+class DeleteCourseInput {
+}
+exports.DeleteCourseInput = DeleteCourseInput;
 class CreateUserInput {
 }
 exports.CreateUserInput = CreateUserInput;

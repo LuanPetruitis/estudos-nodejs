@@ -15,6 +15,17 @@ export class CreateCourseInput {
     duration: number;
 }
 
+export class UpdateCourseInput {
+    id: string;
+    name: string;
+    description: string;
+    duration: number;
+}
+
+export class DeleteCourseInput {
+    id: string;
+}
+
 export class CreateUserInput {
     id: string;
     name: string;
@@ -40,6 +51,10 @@ export abstract class IQuery {
 
 export abstract class IMutation {
     abstract createCourse(data?: Nullable<CreateCourseInput>): Nullable<Course> | Promise<Nullable<Course>>;
+
+    abstract updateCourse(data?: Nullable<UpdateCourseInput>): Nullable<string> | Promise<Nullable<string>>;
+
+    abstract deleteCourse(data?: Nullable<DeleteCourseInput>): Nullable<string> | Promise<Nullable<string>>;
 
     abstract createUser(data?: Nullable<CreateUserInput>): Nullable<User> | Promise<Nullable<User>>;
 
