@@ -1,7 +1,7 @@
 // In resolver you will write GraphQL queries
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { UserService } from './user.service';
-import { CreateUserInput } from 'src/graphql';
+import { CreateUserInput, DeleteUserInput, UpdateUserInput } from 'src/graphql';
 
 @Resolver('User')
 export class UserResolver {
@@ -14,7 +14,16 @@ export class UserResolver {
 
   @Mutation('createUser')
   async createUser(@Args('data') input: CreateUserInput) {
-    console.log('Entrou');
     return this.userService.createUser(input);
+  }
+
+  @Mutation('updateUser')
+  async updateUser(@Args('data') input: UpdateUserInput) {
+    return this.userService.updateUser(input);
+  }
+
+  @Mutation('deleteUser')
+  async deleteUser(@Args('data') input: DeleteUserInput) {
+    return this.userService.deleteUser(input);
   }
 }

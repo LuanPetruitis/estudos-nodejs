@@ -8,16 +8,23 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CourseResolver = void 0;
 const graphql_1 = require("@nestjs/graphql");
 const course_service_1 = require("./course.service");
+const graphql_2 = require("../graphql");
 let CourseResolver = class CourseResolver {
     constructor(courseService) {
         this.courseService = courseService;
     }
     async getCourses() {
         return this.courseService.getCourses();
+    }
+    async createCourse(input) {
+        return this.courseService.createCourse(input);
     }
 };
 exports.CourseResolver = CourseResolver;
@@ -27,6 +34,13 @@ __decorate([
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
 ], CourseResolver.prototype, "getCourses", null);
+__decorate([
+    (0, graphql_1.Mutation)('createCourse'),
+    __param(0, (0, graphql_1.Args)('data')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [graphql_2.CreateCourseInput]),
+    __metadata("design:returntype", Promise)
+], CourseResolver.prototype, "createCourse", null);
 exports.CourseResolver = CourseResolver = __decorate([
     (0, graphql_1.Resolver)('Course'),
     __metadata("design:paramtypes", [course_service_1.CourseService])

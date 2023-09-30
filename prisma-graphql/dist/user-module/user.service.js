@@ -31,6 +31,38 @@ let UserService = class UserService {
             return err;
         }
     }
+    async updateUser(input) {
+        try {
+            const updationData = { ...input };
+            await this.prisma.prismaUsers.update({
+                where: {
+                    id: updationData.id,
+                },
+                data: {
+                    name: updationData.name,
+                    email: updationData.email,
+                },
+            });
+            return 'User updated successfully!';
+        }
+        catch (err) {
+            return err;
+        }
+    }
+    async deleteUser(input) {
+        try {
+            const deletenData = { ...input };
+            await this.prisma.prismaUsers.delete({
+                where: {
+                    id: deletenData.id,
+                },
+            });
+            return 'User deleted successfully!';
+        }
+        catch (err) {
+            return err;
+        }
+    }
 };
 exports.UserService = UserService;
 exports.UserService = UserService = __decorate([

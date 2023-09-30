@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from './prisma.services';
-import { Course } from '../graphql';
+import { Course, CreateCourseInput } from '../graphql';
 
 @Injectable()
 export class CourseService {
@@ -8,5 +8,18 @@ export class CourseService {
 
   async getCourses(): Promise<Course[]> {
     return this.prisma.course.findMany({});
+  }
+
+  async createCourse(input: CreateCourseInput): Promise<Course> {
+    try {
+      const newDate = { ...input };
+
+      const courseCreated = await this.prisma.course.create({
+        data: newDate,
+      });
+      return courseCreated;
+    } catch (err) {
+      return err;
+    }
   }
 }

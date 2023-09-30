@@ -26,6 +26,12 @@ let UserResolver = class UserResolver {
     async createUser(input) {
         return this.userService.createUser(input);
     }
+    async updateUser(input) {
+        return this.userService.updateUser(input);
+    }
+    async deleteUser(input) {
+        return this.userService.deleteUser(input);
+    }
 };
 exports.UserResolver = UserResolver;
 __decorate([
@@ -41,6 +47,20 @@ __decorate([
     __metadata("design:paramtypes", [graphql_2.CreateUserInput]),
     __metadata("design:returntype", Promise)
 ], UserResolver.prototype, "createUser", null);
+__decorate([
+    (0, graphql_1.Mutation)('updateUser'),
+    __param(0, (0, graphql_1.Args)('data')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [graphql_2.UpdateUserInput]),
+    __metadata("design:returntype", Promise)
+], UserResolver.prototype, "updateUser", null);
+__decorate([
+    (0, graphql_1.Mutation)('deleteUser'),
+    __param(0, (0, graphql_1.Args)('data')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [graphql_2.DeleteUserInput]),
+    __metadata("design:returntype", Promise)
+], UserResolver.prototype, "deleteUser", null);
 exports.UserResolver = UserResolver = __decorate([
     (0, graphql_1.Resolver)('User'),
     __metadata("design:paramtypes", [user_service_1.UserService])

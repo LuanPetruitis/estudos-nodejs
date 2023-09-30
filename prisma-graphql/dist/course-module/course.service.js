@@ -19,6 +19,18 @@ let CourseService = class CourseService {
     async getCourses() {
         return this.prisma.course.findMany({});
     }
+    async createCourse(input) {
+        try {
+            const newDate = { ...input };
+            const courseCreated = await this.prisma.course.create({
+                data: newDate,
+            });
+            return courseCreated;
+        }
+        catch (err) {
+            return err;
+        }
+    }
 };
 exports.CourseService = CourseService;
 exports.CourseService = CourseService = __decorate([

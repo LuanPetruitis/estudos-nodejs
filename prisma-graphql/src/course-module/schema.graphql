@@ -2,7 +2,18 @@ type Query {
     courses: [Course]
 }
 
+type Mutation {
+    createCourse(data: CreateCourseInput): Course
+}
+
 type Course {
+    name: String!
+    description: String!
+    duration: Float!
+}
+
+input CreateCourseInput {
+    id: String!
     name: String!
     description: String!
     duration: Float!
